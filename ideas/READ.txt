@@ -1,0 +1,2 @@
+How to run the first draft program:
+run the program and include 'userfile1.txt' as a command line argument
