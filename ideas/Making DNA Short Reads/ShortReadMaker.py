@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 import random
-min_no_space = 20
-max_no_space = 60 # if max sequence length without space
+min_no_space = 150
+max_no_space = 300 # if max sequence length without space
 no_space = 0
 with open("GeneratedDNA.txt","r") as f, open("GeneratedShortReads.txt","w") as w: 
     for line in f:
