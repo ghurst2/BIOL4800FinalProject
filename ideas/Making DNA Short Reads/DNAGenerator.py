@@ -18,7 +18,7 @@ def base_frequency(dna):
     return D
 
 for each in range(1):
-    dna = random_dna_sequence(500)
+    dna = random_dna_sequence(4500)
     f= open("GeneratedDNA.txt", "w+")
     print(dna, file=f)
     f.close()
