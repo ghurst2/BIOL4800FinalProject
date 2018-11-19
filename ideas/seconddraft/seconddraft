@@ -1,1 +1,9 @@
 
+The second draft has a while loop that decreases the confidence of the short read overlap. 
+
+for example:
+the it would first look for and overlab of 13 bp then match those. Once it can no longer match it goes down to 12 etc.
+
+Still need to:
+-add spaces/gaps if there are multiple matches
+-get the second draft to work fully
