@@ -1,9 +1,12 @@
 
-The second draft has a while loop that decreases the confidence of the short read overlap. 
+The 2ndDraft.py has a while loop that decreases the confidence of the short read overlap. 
 
 for example:
 the it would first look for and overlab of 13 bp then match those. Once it can no longer match it goes down to 12 etc.
 
 Still need to:
 -add spaces/gaps if there are multiple matches
--get the second draft to work fully
+-get the 2ndDraft.py to work fully.
+    -only works with 3 lines not sure how to make it work with multiple lines
+-it matches the last bp of first line with other the first bp of lines, 
+need to write is so that if matches the first bp of the firstline with the last bp of other lines.
