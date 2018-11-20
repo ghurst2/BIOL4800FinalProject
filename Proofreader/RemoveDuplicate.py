@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 FILE_NAME = "testprecomb.txt"
-NR_MATCHING_CHARS = 5
+NR_MATCHING_CHARS = 13
 
 lines = set()
 output_lines = [] # keep track of lines you want to keep
