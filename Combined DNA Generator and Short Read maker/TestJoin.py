@@ -19,7 +19,7 @@ def base_frequency(dna):
     return D
 
 for each in range(1):
-    dna = random_dna_sequence(500)
+    dna = random_dna_sequence(300)
     f= open("GeneratedDNA.txt", "w+")
     print(dna, file=f)
     f.close()
@@ -32,7 +32,7 @@ for x in range(Value):
     with open("GeneratedDNA.txt") as f_in, open("GeneratedDNA.txt", "a") as f_out :
         for row in f_in.readlines()[-1:] :
             f_out.write(row)
-            f.close()
+            f_out.close()
 
 min_no_space = 55 #minimum length without spaces
 max_no_space = 75 # max sequence length without space
@@ -48,3 +48,4 @@ with open("GeneratedDNA.txt","r") as f, open("GeneratedShortReads.txt","w") as w
             else:
                 no_space += 1
     f.close()
+    w.close()

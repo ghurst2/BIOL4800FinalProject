@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-FILE_NAME = "testprecomb.txt"
+FILE_NAME = "GeneratedShortReads.txt"
 NR_MATCHING_CHARS = 13
 
 lines = set()
