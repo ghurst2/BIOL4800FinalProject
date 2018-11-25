@@ -43,17 +43,6 @@ def confirm():
 			listoffiles.append(addfile)
 			print(listoffiles)
 	return listoffiles
-def copy():
-	"""This function is used to copy the contents of the users files into a new file"""
-	for fil in listoffiles:
-                userfile = open(fil,'r')
-                userfile_contents = userfile.read()
-                userfile.close()
-                outfile = open('shortread.txt', 'w')
-                outfile.write(userfile_contents)
-                outfile.close()
-	return
-
 
 #define the functions
 def combine():
@@ -84,7 +73,6 @@ def combine():
 #run the program
 confirm()
 for files in listoffiles:
-	copy()
 	#counts the number of shortreads/lines in the file
 	num_lines = sum(1 for line in open('shortread.txt'))
 	while num_lines != 1:
@@ -130,6 +118,7 @@ for files in listoffiles:
 				#combines the lines in Complete and put it in shortread file
 				combine()
 				match = 'yes'
+				num_lines = sum(1 for line in open("shortread.txt"))			
 			file = open(files, 'r')
 			firstline = file.readline()
 #	print("this is the firstline")
