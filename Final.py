@@ -94,13 +94,13 @@ for files in listoffiles:
 			#if no match was found decrease num of bp used to match by 1
 			number = number - 1
 			#limits the number of bp matches to 4 bp. If less than 4 then it starts to match the other side of the shortread (Start to end)
-			if number == 3:
+			if number == 8:
 				number2 = 14
 				match2 = 'no'
 				while match2 != 'yes':
 					number2 = number2 - 1
 					#limits the number of bp matches to 4 bp. If no match insert a gap ('_') for no match.
-					if number2 == 3:
+					if number2 == 8:
 						#adds a '_' to end of matchseq and outputs it and the next line to OutFileName.
 						file = open('shortread.txt', 'r')
 						firstline = file.readline()
