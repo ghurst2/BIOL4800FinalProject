@@ -18,7 +18,7 @@ def base_frequency(dna):
 	return D
 #sets the length of the DNA strand and saves it to file
 for each in range(1):
-	dna = random_dna_sequence(2000)
+	dna = random_dna_sequence(3000)
 	f= open("GeneratedDNA.txt", "w+")
 	print(dna, file=f)
 	f.close()
@@ -43,7 +43,7 @@ with open("GeneratedDNA.txt","r") as f, open("shortread.txt","w") as w:
 			#makes always true if loop
 			if no_space > min_no_space:
 				#randomizes numbers chosen for ==1
-				if random.randint(1,9) == 1 or no_space >= max_no_space:
+				if random.randint(1,10) == 1 or no_space >= max_no_space:
 					w.write("\n")
 					no_space = 0
 			else:
@@ -73,7 +73,6 @@ with open(FILE_NAME, "r") as inF:
 			#moves line to be written to new file
 			output_lines.append(line + '\n') # add line to list, newline needed since we will write to file
 			lines.add(beginOfSequence)
-			#prints the lines that you want to keep
-print(output_lines)
+
 with open(FILE_NAME, 'w') as f:
 	f.writelines(output_lines) # write it out to the file
