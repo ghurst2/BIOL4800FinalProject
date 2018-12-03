@@ -9,7 +9,6 @@ import re
 import random
 
 #Generate Random DNA Sequence
-
 def random_dna_sequence(length):
 	return ''.join(random.choice('ACTG') for each in range(length))
 #DNA sequences with equal base probability
@@ -18,7 +17,7 @@ def base_frequency(dna):
 	for base in 'ATCG':
 		D[base] = dna.count(base)/float(len(dna))
 	return D
-#sets the length of the DNA strand and saves it to file
+#sets the length of the DNA strand and saves generated strand to two files
 for each in range(1):
 	dna = random_dna_sequence(3000)
 	f= open("GeneratedDNA.txt", "w+")
@@ -42,9 +41,9 @@ with open("GeneratedDNA.txt","r") as f, open("shortread.txt","w") as w:
 	for line in f:
 		for c in line:
 			w.write(c)
-			#makes always true if loop
+			#makes if loop
 			if no_space > min_no_space:
-				#randomizes numbers chosen for ==1
+				#randomizes numbers chosen for ==1 and if 1 isnt hit it moves along the strand until it hits 1
 				if random.randint(1,10) == 1 or no_space >= max_no_space:
 					w.write("\n")
 					no_space = 0
@@ -56,15 +55,15 @@ with open("GeneratedDNA.txt","r") as f, open("shortread.txt","w") as w:
 
 #removes strands that start with the same 13 bp
 
-
 #file name as variable
 FILE_NAME = "shortread.txt"
 #set matching characters limit
 NR_MATCHING_CHARS = 13
 
 lines = set()
+#make a list of lines
 output_lines = [] # keep track of lines you want to keep
-#open the file with the short reads
+#open the file with the short reads and read them all
 with open(FILE_NAME, "r") as inF:
 	for line in inF:
 		line = line.strip()
@@ -75,7 +74,7 @@ with open(FILE_NAME, "r") as inF:
 			#moves line to be written to new file
 			output_lines.append(line + '\n') # add line to list, newline needed since we will write to file
 			lines.add(beginOfSequence)
-
+#write out the lines that arent duplicates to the short read txt file
 with open(FILE_NAME, 'w') as f:
 	f.writelines(output_lines) # write it out to the file
 f.close()
