@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 
-#Allow for commandline arguments
+#Imoprting Libraries requried for program
 import sys
 import numpy as NP
 import fileinput
@@ -9,6 +9,7 @@ import re
 import random
 
 #Generate Random DNA Sequence
+
 def random_dna_sequence(length):
 	return ''.join(random.choice('ACTG') for each in range(length))
 #DNA sequences with equal base probability
@@ -17,7 +18,7 @@ def base_frequency(dna):
 	for base in 'ATCG':
 		D[base] = dna.count(base)/float(len(dna))
 	return D
-#sets the length of the DNA strand and saves generated strand to two files
+#sets the length of the DNA strand and saves it to file
 for each in range(1):
 	dna = random_dna_sequence(3000)
 	f= open("GeneratedDNA.txt", "w+")
@@ -41,9 +42,9 @@ with open("GeneratedDNA.txt","r") as f, open("shortread.txt","w") as w:
 	for line in f:
 		for c in line:
 			w.write(c)
-			#makes if loop
+			#makes always true if loop
 			if no_space > min_no_space:
-				#randomizes numbers chosen for ==1 and if 1 isnt hit it moves along the strand until it hits 1
+				#randomizes numbers chosen for ==1
 				if random.randint(1,10) == 1 or no_space >= max_no_space:
 					w.write("\n")
 					no_space = 0
@@ -54,16 +55,13 @@ with open("GeneratedDNA.txt","r") as f, open("shortread.txt","w") as w:
 
 
 #removes strands that start with the same 13 bp
-
-#file name as variable
 FILE_NAME = "shortread.txt"
 #set matching characters limit
 NR_MATCHING_CHARS = 13
 
 lines = set()
-#make a list of lines
 output_lines = [] # keep track of lines you want to keep
-#open the file with the short reads and read them all
+#open the file with the short reads
 with open(FILE_NAME, "r") as inF:
 	for line in inF:
 		line = line.strip()
@@ -74,7 +72,7 @@ with open(FILE_NAME, "r") as inF:
 			#moves line to be written to new file
 			output_lines.append(line + '\n') # add line to list, newline needed since we will write to file
 			lines.add(beginOfSequence)
-#write out the lines that arent duplicates to the short read txt file
+
 with open(FILE_NAME, 'w') as f:
 	f.writelines(output_lines) # write it out to the file
 f.close()
@@ -85,6 +83,7 @@ FilesToRead = sys.argv
 #remove program name,starting at value 1
 listoffiles = FilesToRead[1:]
 print(listoffiles)
+#number of bp in overlap(bp used to find a match)
 number = 13
 
 #defining functions
@@ -99,7 +98,7 @@ def confirm():
 		useranswer = input()
 	if useranswer == "y":
 #run the program
-		print("files are correct")
+		print("program in progress")
 	else:
 		print("Would you like to remove or add files?")
 		print("Press \"r\" to remove a file or press \"a\" to add a file")
@@ -128,19 +127,16 @@ def combine():
 	OutFileName = "CompleteDNAsequence.txt"
 	outfile = open(OutFileName,'r')
 	filecontains = outfile.readlines()
-	#print(filecontains)
 	#removes end of lines spaces and joins the two short reads
 	filecontains[:] = [line.rstrip('\n') for line in filecontains]	
 	filecontains = filecontains[:-1]
-	#print(filecontains)
 	joins = ''.join(filecontains)
 	complete = joins.replace(" ","")
-	#print(complete)
 	outfile.close()
 	#writes the combined shortreads to OutFileName and the shortread file
 	outfilew = open(OutFileName,'w')
 	outfilew.write("%s \n" %complete)
-	#writes it to top of file
+	#writes it to the top of file
 	outoriginalfile = "shortread.txt"
 	originalfile = open(outoriginalfile, 'r+')
 	lin = originalfile.readlines()
@@ -158,7 +154,6 @@ for files in listoffiles:
 	num_lines = sum(1 for line in open('shortread.txt'))
 	#the program will stop when only one line (complete DNA seq) in file
 	while num_lines != 1:
-		#print(num_lines)
 		if (num_lines == 1):
 			break
 		#max num of bp used to match other short reads
@@ -213,38 +208,26 @@ for files in listoffiles:
 					#Looking for match between the first bp of the first short read to the last bp of other short reads in file.
 					file = open(files, 'r')
 					firstline = file.readline()
-				#print("this is the firstline")
-				#print(firstline)
 					#create a variable for the first short read without the matching start
 					#*(used to prevent overlap when doing combine function)
 					first = firstline[number2-1:]
-				#print("THis is the firstline without matchseq")
-				#print(first)
 					#create a variable for the matching seq
 					Match_seq = []
 					Match_nuc = firstline[:number2-1]
 					Match_seq.append(Match_nuc)
 					Match_seq[:] = [line.rstrip('\n') for line in Match_seq]
-				#print("this is the match seq")
-				#print(Match_seq)
 					#reads the rest of the lines in the file and creates a variable for the last bp
 					for restoflines in file.readlines():
-					#print("these are the other lines")
-					#print(restoflines)
 						otherlineEnd = []
 						otherline = restoflines[-number2:]
 						otherlineEnd.append(otherline)
 						otherlineEnd[:] = [line.rstrip('\n') for line in otherlineEnd]
-					#print("this is the end of the other lines")
-					#print(otherlineEnd)
 						#when a match is found, stop and outputs it to the CompleteDNAseq file
 						if Match_seq == otherlineEnd:
 							if Match_seq != otherlineEnd:
-					#print("no match")
 								break
 
 							matchLine = restoflines
-					#print(matchLine)
 							OutFileName = "CompleteDNAsequence.txt"
 							outfile = open(OutFileName,'w')
 							outfile.write("%s \n" %matchLine)
