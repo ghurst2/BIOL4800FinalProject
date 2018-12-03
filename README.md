@@ -12,7 +12,7 @@ If a match is not found using 13bp the program will reduce by one until a match 
 How to run the program:
 Run the python file (Final.py) and the file name that contains your short reads ('shortread.txt')
 
-
+Run Try1.py- for classes/objects (determines the length of each shortread)
 
 Example:
 
