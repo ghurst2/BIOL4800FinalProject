@@ -9,3 +9,16 @@ Our code also gives you the option to generate random DNA to work with. Our code
 
 How to run the program:
 Run the python file and the file name that contains your short reads
+
+
+
+Example:
+
+1. open terminal
+2. give permissions to Final.py
+3. run Final.py "./Final.py shortread.txt"
+4. Follow prompts and enter in vlaues
+5. select yes if "shortread.txt" is the selected file and no if "shortread.txt" is not in the list of files to be read
+6.Allow program time to run...
+7. Once finished look for the generated sequence in "ANSWERS.txt"
+9. Compare sequence in "ANSWERS.txt" to the sequence in "OrigionalStrand.txt"
