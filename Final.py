@@ -306,7 +306,7 @@ for files in listoffiles:
 					match = "yes"
 					num_lines = sum(1 for line in open("shortread.txt"))
 					break
-	print("your complete DNA sequence can be found in CompleteDNAsequence.txt")
+	print("your complete DNA sequence can be found in ANSWER.txt")
 	break
 	
 	#creating the Answer file with the pieced together DNA from the short reads
