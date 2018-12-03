@@ -308,9 +308,11 @@ for files in listoffiles:
 					break
 	print("your complete DNA sequence can be found in CompleteDNAsequence.txt")
 	break
+	
+	#creating the Answer file with the pieced together DNA from the short reads
 
 #open the file with the matched DNA short reads
-#create a file with the modified version
+#create a file with the modified version of the DNA sequence to allow _ to become retuns
 f1 = open('CompleteDNAsequence.txt', 'r')
 f2 = open('CompleteDNAsequence.txt.tmp', 'w')
 for line in f1:
