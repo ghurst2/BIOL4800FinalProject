@@ -3,6 +3,83 @@
 
 #Allow for commandline arguments
 import sys
+import numpy as NP
+import fileinput
+import re
+import random
+
+#Generate Random DNA Sequence
+
+def random_dna_sequence(length):
+	return ''.join(random.choice('ACTG') for each in range(length))
+#DNA sequences with equal base probability
+def base_frequency(dna):
+	D = {}
+	for base in 'ATCG':
+		D[base] = dna.count(base)/float(len(dna))
+	return D
+#sets the length of the DNA strand and saves it to file
+for each in range(1):
+	dna = random_dna_sequence(3000)
+	f= open("GeneratedDNA.txt", "w+")
+	print(dna, file=f)
+	f.close()
+	f= open("OrigionalStrand.txt", "w+")
+	print(dna, file=f)
+	f.close()
+#set how many replica strands (COMMAND LINE ARGUMENTS SHOULD BE 1 LESS THAN WHAT YOU WANT)
+Value =int(input("Enter How Many Replica Strands You Want to Generate: "))
+for x in range(Value):
+	with open("GeneratedDNA.txt") as f_in, open("GeneratedDNA.txt", "a") as f_out :
+		for row in f_in.readlines()[-1:] :
+			f_out.write(row)
+			f_out.close()
+#sets sizes of Short reads
+min_no_space = 75 #minimum length without
+max_no_space = 120 # max sequence length without
+no_space = 0
+with open("GeneratedDNA.txt","r") as f, open("shortread.txt","w") as w: 
+	for line in f:
+		for c in line:
+			w.write(c)
+			#makes always true if loop
+			if no_space > min_no_space:
+				#randomizes numbers chosen for ==1
+				if random.randint(1,10) == 1 or no_space >= max_no_space:
+					w.write("\n")
+					no_space = 0
+			else:
+				no_space += 1
+	f.close()
+	w.close()
+
+
+#removes strands that start with the same 13 bp
+
+
+#file name as variable
+FILE_NAME = "shortread.txt"
+#set matching characters limit
+NR_MATCHING_CHARS = 13
+
+lines = set()
+output_lines = [] # keep track of lines you want to keep
+#open the file with the short reads
+with open(FILE_NAME, "r") as inF:
+	for line in inF:
+		line = line.strip()
+		#sets if loop for the same 13 characters
+		if line == "": continue
+		beginOfSequence = line[:NR_MATCHING_CHARS]
+		if not (beginOfSequence in lines):
+			#moves line to be written to new file
+			output_lines.append(line + '\n') # add line to list, newline needed since we will write to file
+			lines.add(beginOfSequence)
+
+with open(FILE_NAME, 'w') as f:
+	f.writelines(output_lines) # write it out to the file
+f.close()
+
 
 #define the commandline arguments to a variable
 FilesToRead = sys.argv
@@ -201,37 +278,25 @@ for files in listoffiles:
 			#Looking for match between the LAST bp of the first short read to the FIRST bp of other short reads in file.
 			file = open(files, 'r')
 			firstline = file.readline()
-		#print("this is the firstline")
-		#print(firstline)
 			#create a variable for the first short read without the matching end
 			#*(used to prevent overlap when doing the combine function)
 			first = firstline[:-number]
-		#print("THis is the firstline without matchseq")
-		#print(first)
 			#create a variable for the matching seq
 			Match_seq = []
 			Match_nuc = firstline[-number:]
 			Match_seq.append(Match_nuc)
 			Match_seq[:] = [line.rstrip('\n') for line in Match_seq]
-		#print("this is the match seq")
-		#print(Match_seq)
 			#reads the rest of the lines in the file and creates a variable for the first bp
 			for restoflines in file.readlines():
-		#print("these are the other lines")
-		#print(restoflines)
 				otherlineStart = []
 				otherline = restoflines[:number-1]
 				otherlineStart.append(otherline)
 				otherlineStart[:] = [line.rstrip('\n') for line in otherlineStart]
-		#print("this is the start of the other lines")
-		#print(otherlineStart)
 				#if matches, stops and outputs it to the CompleteDNAseq file
 				if Match_seq == otherlineStart:
 					if Match_seq != otherlineStart:
-		#print("no match")
 						break
 					matchLine = restoflines
-		#print(matchLine)
 					OutFileName = "CompleteDNAsequence.txt"
 					outfile = open(OutFileName,'w')
 					#outputs first to remove overlap
@@ -260,3 +325,16 @@ for files in listoffiles:
 					num_lines = sum(1 for line in open("shortread.txt"))
 					break
 	print("your complete DNA sequence can be found in CompleteDNAsequence.txt")
+	break
+
+#open the file with the matched DNA short reads
+#create a file with the modified version
+f1 = open('CompleteDNAsequence.txt', 'r')
+f2 = open('CompleteDNAsequence.txt.tmp', 'w')
+for line in f1:
+	f2.write(line.replace('_', '\n')) #replaces _ with tab
+f1.close()
+f2.close()
+#opens modified file, reads first line and saves it to new file
+lines = open('CompleteDNAsequence.txt.tmp').readlines()
+open('ANSWER.txt', 'w').writelines(lines[:+1])
